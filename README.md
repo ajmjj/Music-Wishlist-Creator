@@ -1,0 +1,1 @@
+# Slsk-Wishlist-Creator
