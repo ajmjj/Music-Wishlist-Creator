@@ -1,6 +1,17 @@
 import datetime
 import pyperclip as pc
 
+def get_user_intention():
+    res = input('Do you want to [r]un the program or [c]hange settings?: ')
+    if res.strip().lower() == 'r':
+        return 'run'
+    elif res.strip().lower() == 'c':
+        return 'change'
+    else:
+        print('Invalid input. Please try again.')
+        get_user_intention()
+
+        
 def get_date():
     # Get current date and time
     now = datetime.datetime.now()
@@ -8,10 +19,10 @@ def get_date():
     date = now.strftime("%Y-%m-%d %H:%M:%S")
     return date
 
-def write_wishlist_to_file(wishlist):
+def write_wishlist_to_file(wishlist, download_folder):
     wishlist_str = wishlist_to_string(wishlist)
     # Open file
-    with open(f'slsk wishlist - {wishlist.date}.txt', 'w') as f:
+    with open(download_folder,f'slsk wishlist - {wishlist.date}.txt', 'w') as f:
         # Write wishlist to file
         f.write("Updated on: " + wishlist.date + "\n\n")
 
@@ -29,7 +40,8 @@ def query_output_type():
         print('Invalid input. Please try again.')
         query_output_type()
 
-def copy_wishlist_to_clipboard(wishlist_str):
+def copy_wishlist_to_clipboard(wishlist):
+    wishlist_str = wishlist_to_string(wishlist)
     pc.copy(wishlist_str)
 
 def wishlist_to_string(wishlist):
@@ -49,6 +61,20 @@ def wishlist_to_string(wishlist):
         wishlist_str += f"  {item.url}\n\n"
     return wishlist_str
 
+def output_wishlist(wishlist, output):
+    if output == 'file':
+        # Write wishlist to file
+        write_wishlist_to_file(wishlist, output)
+        print(f'Wishlist written to file: slsk wishlist - {wishlist.date}.txt')
+
+    elif output =='clipboard':
+        # Copy wishlist to clipboard
+        copy_wishlist_to_clipboard(wishlist)
+        print('Wishlist copied to clipboard.')
+
+
+
+        
 class Wishlist:
     def __init__(self, date, discogs_items, bandcamp_items):
         self.date = date
