@@ -59,34 +59,6 @@ def get_items_from_json(wishlist_dict):
         wishlist_items.append(BandcampItem(item_title, item_artist, item_url))
     return wishlist_items
 
-def get_list_items(soup):
-    # Filter to wishlist-grid
-    wishlist_grid = soup.find("div", {"id": "wishlist-grid"})
-    # Get collection grid
-    collection_grid = wishlist_grid.find("ol", {"class": "collection-grid"})
-    # Get list items
-    list_items_raw = collection_grid.find_all("li", {"class": "collection-item-container"})
-    return list_items_raw
-
-# def get_first_20(soup):
-#     # Filter to wishlist-grid
-#     wishlist_grid = soup.find("div", {"id": "wishlist-grid"})
-#     # Get collection grid
-#     collection_grid = wishlist_grid.find("ol", {"class": "collection-grid"})
-#     # Get list items
-#     list_items_raw = collection_grid.find_all("li", {"class": "collection-item-container"})
-    
-#     list_items = []
-#     for item in list_items_raw:
-#         collection_title_details = item.find("div", {"class": "collection-title-details"})
-#         item_url = collection_title_details.find("a", {"class": "item-link"})['href']
-#         item_title = collection_title_details.find("div", {"class": "collection-item-title"}).text
-#         item_artist = collection_title_details.find("div", {"class": "collection-item-artist"}).text.replace('by ', '')
-#         list_items.append(BandcampItem(item_title, item_artist, item_url))
-
-#     return list_items
-
-
 # Classes:
 class BandcampItem:
     def __init__(self, title, artist, url):
