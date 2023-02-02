@@ -17,6 +17,7 @@ def write_wishlist_to_file(wishlist):
         f.write("\n\nDiscogs items:\n")
         for item in wishlist.discogs_items:
             f.write(f"[{item.catno}] {item.artist} - {item.title} ({item.year})\n")
+            f.write(f"  {item.url}\n\n")
         
         # Write Bandcamp items to file
         f.write("\n\nBandcamp items:\n")

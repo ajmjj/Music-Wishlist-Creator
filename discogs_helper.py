@@ -83,7 +83,8 @@ def get_wantlist(client):
                  label = re.sub(regex, "", label).strip() # remove (x) from label name
             catno = wantlistItem.release.data['labels'][0]['catno'].strip()
             year = wantlistItem.release.data['year']
-            wantlist.append(DiscogsItem(id, title, artist, label, catno, year))
+            url = wantlistItem.release.url
+            wantlist.append(DiscogsItem(id, title, artist, label, catno, year, url))
             bar()
     return(wantlist)
 
@@ -94,10 +95,11 @@ def sort_by_label(wantlist):
 
 
 class DiscogsItem:
-    def __init__(self, id, title, artist, label, catno, year):
+    def __init__(self, id, title, artist, label, catno, year, url):
         self.id = id
         self.title = title
         self.artist = artist
         self.label = label
         self.catno = catno
         self.year = year
+        self.url = url
