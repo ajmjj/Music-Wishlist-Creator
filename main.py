@@ -56,7 +56,17 @@ date = main.get_date()
 # Create wishlist object
 wishlist = main.Wishlist(date, discogs_wantlist, bandcamp_wishlist_items)
 
-# Write wishlist to file
-main.write_wishlist_to_file(wishlist)
+wishlist_str = main.wishlist_to_string(wishlist)
 
-print("wishlist created")
+output = main.query_output_type()
+
+if output == 'file':
+    # Write wishlist to file
+    main.write_wishlist_to_file(wishlist)
+    print(f'Wishlist written to file: slsk wishlist - {wishlist.date}.txt')
+
+elif output =='clipboard':
+    # Copy wishlist to clipboard
+    main.copy_wishlist_to_clipboard(wishlist_str)
+    print('Wishlist copied to clipboard.')
+
