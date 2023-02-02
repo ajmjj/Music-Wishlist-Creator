@@ -1,7 +1,5 @@
 import os
-import configparser
 
-from bs4 import BeautifulSoup
 import discogs_helper as discogs
 import bandcamp_helper as bandcamp
 import main_helper as main

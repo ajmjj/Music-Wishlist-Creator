@@ -73,7 +73,7 @@ def get_wantlist(client):
     with alive_bar(len(wantlist_res)) as bar:
         regex = r"\(\d+\)"
         for wantlistItem in wantlist_res: # todo -> waste of time? could be skipped and used later
-            id = wantlistItem.release.id
+            id = wantlistItem.release.id # necessary?
             title = wantlistItem.release.title.strip()
             artist = wantlistItem.release.artists[0].name.strip()
             if artist.endswith(')') and re.search(regex,artist): 
@@ -88,9 +88,7 @@ def get_wantlist(client):
     return(wantlist)
 
 def sort_by_label(wantlist):
-    # print([item.label for item in wantlist])
     wantlist = sorted(wantlist, key=lambda item: item.label)
-    # print([item.label for item in wantlist])
     return wantlist
 
 
