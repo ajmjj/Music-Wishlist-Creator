@@ -22,6 +22,7 @@ def write_wishlist_to_file(wishlist):
         f.write("\n\nBandcamp items:\n")
         for item in wishlist.bandcamp_items:
             f.write(f"{item.artist} - {item.title}\n")
+            f.write(f"  {item.url}\n\n")
 
 
 
