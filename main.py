@@ -1,12 +1,24 @@
 import os
-
 import discogs_helper as discogs
 import bandcamp_helper as bandcamp
 import main_helper as main
+import settings_helper as settings
 
 # Clear console
 os.system('cls' if os.name == 'nt' else 'clear')
 
+print('================================================================================')
+print('                                Init Program')
+print('================================================================================')
+# Ask user if they want to change settings or run program
+user_intention = main.get_user_intention()
+if user_intention == 'change':
+    # Change settings
+    settings.prompt_settings()
+
+# Set download folder and output type
+download_folder = settings.get_download_folder()
+output = settings.get_default_output()
 
 print('================================================================================')
 print('                                Discogs Init')
@@ -59,15 +71,11 @@ wishlist = main.Wishlist(date, discogs_wantlist, bandcamp_wishlist_items)
 
 wishlist_str = main.wishlist_to_string(wishlist)
 
-output = main.query_output_type()
+# If no default output 
+if output == "":
+    # Query user for output type
+    output = main.query_output_type()
 
-if output == 'file':
-    # Write wishlist to file
-    main.write_wishlist_to_file(wishlist)
-    print(f'Wishlist written to file: slsk wishlist - {wishlist.date}.txt')
-
-elif output =='clipboard':
-    # Copy wishlist to clipboard
-    main.copy_wishlist_to_clipboard(wishlist_str)
-    print('Wishlist copied to clipboard.')
+# Output wishlist to file or clipboard
+main.output_wishlist(wishlist, output)
 
