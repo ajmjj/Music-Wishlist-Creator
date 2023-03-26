@@ -68,22 +68,31 @@ def get_wantlist(client):
     print('\nGetting wantlist from Discogs...')
     wantlist_res = client.identity().wantlist
     wantlist = []
-    print('Found ' + str(len(wantlist_res)) + ' items in your wantlist')
+    print('Found ' + str(wantlist_res.count) + ' items in your wantlist')
     print('\nProcessing wantlist data...')
     with alive_bar(len(wantlist_res)) as bar:
         regex = r"\(\d+\)"
         for wantlistItem in wantlist_res: # todo -> waste of time? could be skipped and used later
             id = wantlistItem.release.id # necessary?
-            title = wantlistItem.release.title.strip()
-            artist = wantlistItem.release.artists[0].name.strip()
+            # Set title, artist, label, catno, year, url
+            # title = wantlistItem.release.title.strip()
+            title = wantlistItem.data['basic_information']['title'].strip()
+            # artist = wantlistItem.release.artists[0].name.strip()
+            artist = wantlistItem.data['basic_information']['artists'][0]['name'].strip()
+            # Check if artist name ends with (number) and remove it
             if artist.endswith(')') and re.search(regex,artist): 
                 artist = re.sub(regex, "", artist).strip() # remove (x) from artist name
-            label = wantlistItem.release.labels[0].name.strip()
+            # label = wantlistItem.release.labels[0].name.strip()
+            label = wantlistItem.data['basic_information']['labels'][0]['name'].strip()
+            # Check if label name ends with (number) and remove it
             if label.endswith(')') and re.search(regex,label):
                  label = re.sub(regex, "", label).strip() # remove (x) from label name
-            catno = wantlistItem.release.data['labels'][0]['catno'].strip()
-            year = wantlistItem.release.data['year']
-            url = wantlistItem.release.url
+            # catno = wantlistItem.release.data['labels'][0]['catno'].strip()
+            catno = wantlistItem.data['basic_information']['labels'][0]['catno'].strip()
+            # year = wantlistItem.release.data['year']
+            year = wantlistItem.data['basic_information']['year']
+            # url = wantlistItem.release.url
+            url = f'https://www.discogs.com/release/{id}'
             wantlist.append(DiscogsItem(id, title, artist, label, catno, year, url))
             bar()
     return(wantlist)

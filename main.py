@@ -33,6 +33,7 @@ soup = bandcamp.get_soup(bandcamp_username)
 
 # Get number of wishlist items from soup object
 num_wishlist_items = bandcamp.get_num_wishlist_items(soup)
+print(f'Found {num_wishlist_items} items in your bandcamp wishlist.')
 
 # Get fan id from soup object
 fan_id = bandcamp.get_fan_id(soup)
