@@ -37,7 +37,7 @@ def change_default_output():
     print('Enter new default output')
     print('1. [w]rite to file')
     print('2. [c]opy to clipboard')
-    print('3. [clear] to clear the default output')
+    print('3. [a]sk each time (default)')
     res = input('Enter decision: ')
 
     # Check user input
@@ -45,17 +45,19 @@ def change_default_output():
         new_output = 'file'
     elif res.strip().lower() == 'c':
         new_output = 'clipboard'
+    elif res.strip().lower() == 'a':
+        new_output = 'ask'
     elif res.strip().lower() == 'clear':
         new_output = ''
     else:
-        print('Invalid input. Please respond with [w] or [c].')
+        print('Invalid input. Please respond with [w], [c] or [a].')
         change_default_output()
     
     # Write new default output to config file
     config['UserSettings']['default_output'] = new_output
     with open('config.ini', 'w') as configfile:
         config.write(configfile)
-    print("Default output changed")
+    print(f"Default output changed -> {new_output}")
 
 def change_download_folder():
     path = askdirectory(title='Select Folder') # shows dialog box and return the path

@@ -71,11 +71,5 @@ wishlist = main.Wishlist(date, discogs_wantlist, bandcamp_wishlist_items)
 
 wishlist_str = main.wishlist_to_string(wishlist)
 
-# If no default output 
-if output == "":
-    # Query user for output type
-    output = main.query_output_type()
-
 # Output wishlist to file or clipboard
 main.output_wishlist(wishlist, output)
-
