@@ -1,5 +1,5 @@
-# Slsk-Wishlist-Creator
-Slsk-Wishlist-Creator is a python 3.x script that lets users easily create formatted wishlists that that they can paste into their soulseek user info. The wishlist creator has disogs wantlist and bandcamp wishlist as optional sources.
+# Music-Wishlist-Creator
+Music-Wishlist-Creator is a python 3.x script that lets users easily create formatted wishlists that that they can paste into their  user bios in file sharing applications. The wishlist creator has disogs wantlist and bandcamp wishlist as optional sources.
  
 ## Use
 1. Download zipped file 
